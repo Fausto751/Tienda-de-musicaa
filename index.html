@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harmony Music House | Tienda y Escuela de Música</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="#inicio" class="logo">Harmony Music House</a>
+    <nav>
+      <a href="#explorar">Tienda y Escuela</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <button class="cart-toggle" id="cartToggle" aria-label="Abrir carrito">
+      Carrito <span class="badge" id="cartCount">0</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <div class="hero-text">
+        <h1>Cada gran canción empieza con un primer acorde.</h1>
+        <p>Instrumentos para tocar hoy y talleres para aprender mañana, en un solo lugar.</p>
+        <a class="btn" href="#explorar" id="ctaExplorar">Explorar Tienda</a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="strings"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="vinyl"><span></span></div>
+        <div class="hero-icons">🎸 🎹 🥁 🎷</div>
+      </div>
+    </section>
+
+    <!-- TABS TIENDA / ESCUELA -->
+    <section class="section" id="explorar">
+      <div class="tabs" role="tablist">
+        <button class="tab active" role="tab" data-tab="tienda" aria-selected="true">Tienda</button>
+        <button class="tab" role="tab" data-tab="escuela" aria-selected="false">Escuela de Música</button>
+      </div>
+
+      <!-- Catálogo -->
+      <div class="panel active" id="tienda" role="tabpanel">
+        <h2>Instrumentos destacados</h2>
+        <div class="filters" id="filters">
+          <button class="chip active" data-cat="todos">Todos</button>
+          <button class="chip" data-cat="Cuerdas">Cuerdas</button>
+          <button class="chip" data-cat="Teclados">Teclados</button>
+          <button class="chip" data-cat="Percusión">Percusión</button>
+          <button class="chip" data-cat="Viento">Viento</button>
+        </div>
+        <div class="grid products" id="productGrid"></div>
+      </div>
+
+      <!-- Talleres -->
+      <div class="panel" id="escuela" role="tabpanel">
+        <h2>Talleres de música</h2>
+        <p class="lead">Grupos reducidos, instrumentos disponibles en el aula y clase de prueba gratis.</p>
+        <div class="grid workshops" id="workshopGrid"></div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="section dark" id="testimonios">
+      <h2>Lo que dicen quienes ya tocan con nosotros</h2>
+      <div class="grid testimonials">
+        <blockquote>
+          “Compré mi primera guitarra y empecé el taller el mismo día. A los dos meses ya tocaba en familia.”
+          <cite>Lucía M., estudiante de guitarra</cite>
+        </blockquote>
+        <blockquote>
+          “Me asesoraron para elegir mi teclado sin gastar de más. Atención honesta y precios claros.”
+          <cite>Andrés R., tecladista de banda local</cite>
+        </blockquote>
+        <blockquote>
+          “El taller de canto me quitó el miedo al escenario. Ya me presenté en dos peñas.”
+          <cite>Valeria P., cantante</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- CONTACTO / PEDIDO -->
+    <section class="section" id="contacto">
+      <h2>Confirma tu pedido o pide una cotización</h2>
+      <div class="order-wrap">
+        <form id="orderForm" novalidate>
+          <label>Nombre completo
+            <input type="text" id="nombre" autocomplete="name">
+            <small class="error" id="errNombre"></small>
+          </label>
+          <label>Correo electrónico
+            <input type="email" id="email" autocomplete="email">
+            <small class="error" id="errEmail"></small>
+          </label>
+          <label>Teléfono
+            <input type="tel" id="telefono" autocomplete="tel">
+            <small class="error" id="errTelefono"></small>
+          </label>
+          <label>Método de pago
+            <select id="pago">
+              <option value="">Selecciona una opción</option>
+              <option value="efectivo">Efectivo (10% de descuento)</option>
+              <option value="tarjeta">Tarjeta</option>
+              <option value="transferencia">Transferencia</option>
+            </select>
+            <small class="error" id="errPago"></small>
+          </label>
+          <label>Mensaje o consulta (opcional)
+            <textarea id="mensaje" rows="3"></textarea>
+          </label>
+          <button type="submit" class="btn">Confirmar pedido</button>
+          <p class="success" id="formMsg" role="status"></p>
+        </form>
+
+        <aside class="summary" aria-live="polite">
+          <h3>Resumen del pedido</h3>
+          <ul id="summaryList"></ul>
+          <dl>
+            <div><dt>Subtotal</dt><dd id="sumSubtotal">$0.00</dd></div>
+            <div><dt>Descuento</dt><dd id="sumDiscount">-$0.00</dd></div>
+            <div class="total"><dt>Total a pagar</dt><dd id="sumTotal">$0.00</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Harmony Music House · Instrumentos y talleres de música</p>
+  </footer>
+
+  <!-- CARRITO FLOTANTE -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="cart" id="cart" aria-label="Carrito de compras">
+    <div class="cart-head">
+      <h3>Tu carrito</h3>
+      <button id="cartClose" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <ul id="cartItems"></ul>
+    <div class="cart-foot">
+      <div class="cart-total"><span>Total</span><strong id="cartTotal">$0.00</strong></div>
+      <button class="btn small" id="clearCart">Vaciar</button>
+      <a class="btn small" href="#contacto" id="goCheckout">Finalizar pedido</a>
+    </div>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>
